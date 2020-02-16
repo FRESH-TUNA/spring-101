@@ -1,12 +1,15 @@
-mysql:
-  image: mysql:5.7
-  ports:
-    - "3306:3306"
-  environment:
-    - MYSQL_ROOT_PASSWORD=
-    - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    - MYSQL_USER=petclinic
-    - MYSQL_PASSWORD=petclinic
-    - MYSQL_DATABASE=petclinic
-  volumes:
-    - "./conf.d:/etc/mysql/conf.d:ro"
+version: '3.1'
+
+services:
+  web:
+    image: lunacircle4/java:8
+    container_name: spring-petclinic
+    working_dir: /root/app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/root/app
+    stdin_open: true
+    tty: true
+    command:
+      - /bin/bash
